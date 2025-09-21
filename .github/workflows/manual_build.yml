@@ -1,0 +1,91 @@
+name: Manual Build
+
+on:
+  push:
+    tags:
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  build:
+    name: build dist files
+    runs-on: ubuntu-latest
+    outputs:
+      files: ${{ steps.file_list.outputs.files }}
+
+    steps:
+    - uses: actions/checkout@v4
+
+
+    - uses: actions/setup-python@v5
+      with:
+        python-version: 3.11
+
+    - name: install build
+      run: python -m pip install --upgrade build
+
+    - name: build dist
+      run: python -m build
+
+    - name: Collect build file list
+      id: file_list
+      run: |
+        files=$(ls dist)
+        # 转换成 JSON 数组 ["file1.txt","file2.txt",...]
+        json_files=$(printf '"%s",' $files)
+        json_files="[${json_files%,}]"
+        echo "files=$json_files" >> $GITHUB_OUTPUT
+        echo "Generated JSON: $json_files"
+
+    - uses: actions/upload-artifact@v4
+      with:
+        name: build-files-temp
+        path: dist/*
+        if-no-files-found: error
+
+    - name: Create Release
+      id: create_release
+      if: github.ref_type == 'tag'
+      uses: ncipollo/release-action@v1
+      with:
+        generateReleaseNotes: true
+        allowUpdates: true
+        artifactErrorsFailBuild: true
+        name: "Release ${{ github.ref_name }}"
+        tag: ${{ github.ref_name }}
+        token: ${{ secrets.GITHUB_TOKEN }}
+
+    - name: Upload each file as release asset
+      if: startsWith(github.ref, 'refs/tags/')
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      run: |
+        for f in dist/*; do
+          name=$(basename "$f")
+          echo "Uploading $f as $name"
+          gh release upload "${{ github.ref_name }}" "$f"
+        done
+    
+
+  upload-individual:
+    needs: build
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        file: ${{ fromJSON(needs.build.outputs.files) }}  # 这里动态生成文件列表
+    steps:
+      - name: Download temp artifact
+        uses: actions/download-artifact@v4
+        with:
+          name: build-files-temp
+          path: build
+
+      - name: Upload single file as artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: ${{ matrix.file }}
+          path: build/${{ matrix.file }}
+
+  
