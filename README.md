@@ -1,3 +1,3 @@
-# sifli-docs-toolbox
+# SiFli Documentation Toolbox for Sphinx
 
 

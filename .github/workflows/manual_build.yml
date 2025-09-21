@@ -2,7 +2,7 @@ name: Manual Build
 
 on:
   push:
-    tags:
+    tags: []
   workflow_dispatch:
 
 permissions:
