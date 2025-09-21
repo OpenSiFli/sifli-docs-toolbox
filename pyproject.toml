@@ -82,3 +82,6 @@ sf-build-docs = "sifli_docs_toolbox.build_docs:main"
 
 [tool.setuptools.packages.find]
 where = ["src"]
+
+[tool.setuptools.package-data]
+"sifli_docs_toolbox" = ["_static/*"]

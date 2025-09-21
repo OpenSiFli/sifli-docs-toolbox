@@ -11,6 +11,32 @@ import argparse
 import os
 import shutil
 
+docs_toolbox_dir = os.path.abspath(os.path.dirname(__file__))
+
+def copy_static_files():
+    static_src = os.path.join(docs_toolbox_dir, '_static')
+    static_dst = os.path.join('source', '_static')
+
+    print(static_src)
+
+    if not os.path.exists(static_dst):
+        os.makedirs(static_dst)
+
+    for root, _, files in os.walk(static_src):
+        for file in files:
+            src_file = os.path.join(root, file)
+            relative_path = os.path.relpath(src_file, static_src)
+            dst_file = os.path.join(static_dst, relative_path)
+            print(src_file)
+            print(dst_file)
+
+            dst_dir = os.path.dirname(dst_file)
+            if not os.path.exists(dst_dir):
+                os.makedirs(dst_dir)
+
+            if not os.path.exists(dst_file):
+                shutil.copy2(src_file, dst_file)
+
 
 def run_command(command, cwd=None):
     result = subprocess.run(command, shell=True, cwd=cwd)
@@ -28,6 +54,7 @@ def make_html(version, lang):
 
 
 def _main(version, lang):
+    # copy_static_files()
     make_html(version, lang)
 
 def main():
