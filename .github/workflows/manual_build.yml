@@ -40,6 +40,11 @@ jobs:
         with:
           python-version: 3.11
 
+      - name: Install upload tools
+        run: |
+          sudo apt-get update
+          pip install coscmd
+
       - name: Install build
         run: python -m pip install --upgrade build
 
