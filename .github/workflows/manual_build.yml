@@ -43,7 +43,7 @@ jobs:
       - name: Install upload tools
         run: |
           sudo apt-get update
-          pip install coscmd
+          pip install coscmd tccli
 
       - name: Install build
         run: python -m pip install --upgrade build
