@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "sifli-docs-toolbox"
-version = "0.1.1"
+version = "0.1.2"
 description = "SiFli Documentation Toolbox for Sphinx"
 authors = [{name = "SiFli Technologies(Nanjing) Co., Ltd"}]
 readme = "README.md"
