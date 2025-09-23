@@ -25,3 +25,8 @@ After installing the package, run `sf-build-docs` to build the document in the d
 
 You can also get a template document by cloning https://github.com/opensifli/sifli-doc-template/.
 
+## Download
+The latest version could be found: 
+- [wheel](https://downloads.sifli.com/tools/sifli-docs-toolbox/latest/sifli_docs_toolbox-latest-py3-none-any.whl)
+- [source](https://downloads.sifli.com/tools/sifli-docs-toolbox/latest/sifli_docs_toolbox-latest.tar.gz)
+
