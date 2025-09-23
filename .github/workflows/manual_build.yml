@@ -95,14 +95,34 @@ jobs:
           coscmd config -a ${{ secrets.COS_DOCS_SECRET_ID }} -s ${{ secrets.COS_DOCS_SECRET_KEY }} -b ${{ secrets.COS_DOCS_BUCKET }} -r ${{ secrets.COS_DOCS_REGION }}
 
       - name: Upload artifacts to COS
+        if: github.ref_type == 'tag'
         run: |
           VERSION=${{ steps.determine-version.outputs.VERSION }}
           for f in dist/*; do
             name=$(basename "$f")
+            # Upload to the version-specific directory
             echo "Uploading $f as $name"
             coscmd upload -rs --delete --yes "$f" tools/sifli-docs-toolbox/$VERSION/
+
+            if [[ "$name" == *.whl ]]; then
+              latest_name="sifli_docs_toolbox-latest-py3-none-any.whl"
+            elif [[ "$name" == *.tar.gz ]]; then
+              latest_name="sifli_docs_toolbox-latest.tar.gz"
+            fi
+           
+            echo "Uploading $f to latest directory as $latest_name"
+            coscmd upload -rs --delete --yes "$f" tools/sifli-docs-toolbox/latest/$latest_name
           done
-          echo "Uploaded artifacts to $VERSION/"
+          echo "Uploaded artifacts to $VERSION/ and latest/"
+
+      - name: Purge CDN Cache
+        run: |
+          export TENCENTCLOUD_SECRET_ID=${{ secrets.COS_DOCS_SECRET_ID }}
+          export TENCENTCLOUD_SECRET_KEY=${{ secrets.COS_DOCS_SECRET_KEY }}
+          export TENCENTCLOUD_REGION=${{ secrets.COS_DOCS_REGION }}
+          tccli cdn PurgePathCache --cli-unfold-argument --Paths "https://downloads.sifli.com/tools/latest/" --FlushType flush
+          tccli cdn PurgePathCache --cli-unfold-argument --Paths "https://downloads.sifli.com/tools/$VERSION/" --FlushType flush
+
 
 
   upload-individual:
@@ -124,4 +144,3 @@ jobs:
           name: ${{ matrix.file }}
           path: build/${{ matrix.file }}
 
-  
