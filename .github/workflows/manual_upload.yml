@@ -32,11 +32,6 @@ jobs:
         # 定义版本号列表
         versions=(
           "0.1.0"
-          "0.1.1"
-          "0.1.2"
-          "0.1.3"
-          "0.1.4"
-          "0.1.5"
         )
 
         # 遍历版本号列表
@@ -59,8 +54,8 @@ jobs:
           # 上传文件到 COS
           for f in dist/$version/*; do
             name=$(basename "$f")
-            echo "Uploading $f as $name"
-            coscmd upload -rs --delete --yes "$f" tools/${PROJ_NAME}/v$version/
+            echo "Uploading $f as $name to tools/${PROJ_NAME}/v$version_temp/"
+            coscmd upload -rs --delete --yes "$f" tools/${PROJ_NAME}/v$version_temp/
           done
         done
         echo "All versions processed and uploaded."
