@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "sifli-docs-toolbox"
-version = "0.1.5"
+version = "0.1.6"
 description = "SiFli Documentation Toolbox for Sphinx"
 authors = [{name = "SiFli Technologies(Nanjing) Co., Ltd"}]
 readme = "README.md"
@@ -72,6 +72,7 @@ dependencies = [
     "sphinxcontrib-qthelp==1.0.7",
     "sphinxcontrib-serializinghtml==1.1.10",
     "typing_extensions==4.12.2",
+    "tzdata==2025.2",
     "urllib3==2.2.1",
     "shibuya @ https://downloads.sifli.com/tools/shibuya/latest/shibuya-latest-py3-none-any.whl",
 ]
