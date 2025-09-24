@@ -55,8 +55,8 @@ jobs:
           # 上传文件到 COS
           for f in dist/$version/*; do
             name=$(basename "$f")
-            echo "Uploading $f as $name to tools/${PROJ_NAME}/v${version}/"
-            coscmd upload -rs --delete --yes "$f" tools/${PROJ_NAME}/v${version}/
+            echo "Uploading $f as $name to tools/${PROJ_NAME}/vs${version}/"
+            coscmd upload -rs --delete --yes "$f" tools/${PROJ_NAME}/vs${version}/
           done
         done
         echo "All versions processed and uploaded."
