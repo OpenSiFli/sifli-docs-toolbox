@@ -27,7 +27,6 @@ jobs:
         coscmd config -a ${{ secrets.COS_DOCS_SECRET_ID }} -s ${{ secrets.COS_DOCS_SECRET_KEY }} -b ${{ secrets.COS_DOCS_BUCKET }} -r ${{ secrets.COS_DOCS_REGION }}
 
     - name: Upload artifacts to COS
-      if: github.ref_type == 'tag'
       run: |
         VERSION=${{ github.ref_name }}
         # 定义版本号列表
