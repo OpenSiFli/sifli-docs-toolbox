@@ -53,8 +53,8 @@ jobs:
 
           # 上传文件到 COS
           # coscmd upload -rs --delete --yes dist/${version} tools/${PROJ_NAME}/v${version}/
-          coscmd upload -rs --delete --yes dist/${version}/sphinx_simplepdf-${version}-py3-none-any.whl tools/sphinx-simplepdf/latest/sphinx_simplepdf-$latest-py3-none-any.whl
-          coscmd upload -rs --delete --yes dist/${version}/sphinx_simplepdf-${version}.tar.gz tools/sphinx-simplepdf/latest/sphinx_simplepdf-$latest.tar.gz
+          coscmd upload -rs --delete --yes dist/${version}/sphinx_simplepdf-${version}-py3-none-any.whl tools/sphinx-simplepdf/latest/sphinx_simplepdf-latest-py3-none-any.whl
+          coscmd upload -rs --delete --yes dist/${version}/sphinx_simplepdf-${version}.tar.gz tools/sphinx-simplepdf/latest/sphinx_simplepdf-latest.tar.gz
         done
         echo "All versions processed and uploaded."
 
