@@ -51,6 +51,6 @@ def setup(app):
     app.add_transform(unique_ids)
     
     return {
-        "parallel_read_safe": True,
-        "parallel_write_safe": True,
+        "parallel_read_safe": False,
+        "parallel_write_safe": False,
     }
