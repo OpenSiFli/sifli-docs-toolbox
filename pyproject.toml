@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "sifli-docs-toolbox"
-version = "0.2.0"
+version = "0.2.1"
 description = "SiFli Documentation Toolbox for Sphinx"
 authors = [{name = "SiFli Technologies(Nanjing) Co., Ltd"}]
 readme = "README.md"
@@ -88,7 +88,7 @@ dependencies = [
     "wheel==0.45.1",
     "zopfli==0.2.3.post1",
     "shibuya @ https://downloads.sifli.com/tools/shibuya/latest/shibuya-latest-py3-none-any.whl",
-    "sphinx-simplepdf @ https://github.com/OpenSiFli/sphinx-simplepdf-sifli/releases/download/v1.6.0%2Bsifli.1/sphinx_simplepdf-1.6.0+sifli.1-py3-none-any.whl",
+    "sphinx-simplepdf @ https://github.com/OpenSiFli/sphinx-simplepdf-sifli/releases/download/v1.6.0%2Bsifli.2/sphinx_simplepdf-1.6.0+sifli.2-py3-none-any.whl",
 ]
 
 
