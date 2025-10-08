@@ -1,7 +1,7 @@
 name: Manual Upload
 
 env:
-  PROJ_NAME: sifli-docs-toolbox
+  PROJ_NAME: sphinx-simplepdf
 
 on:
   workflow_dispatch:
@@ -31,8 +31,7 @@ jobs:
         VERSION=${{ github.ref_name }}
         # 定义版本号列表
         versions=(
-          "0.1.0"
-          "0.1.1"
+          "1.6.0+sifli.1"
         )
 
         # 遍历版本号列表
@@ -41,8 +40,8 @@ jobs:
 
           # 定义文件列表
           files=(
-            "https://github.com/OpenSiFli/sifli-docs-toolbox/releases/download/v${version}/sifli_docs_toolbox-${version}-py3-none-any.whl"
-            "https://github.com/OpenSiFli/sifli-docs-toolbox/releases/download/v${version}/sifli_docs_toolbox-${version}.tar.gz"
+            "https://github.com/OpenSiFli/sphinx-simplepdf-sifli/releases/download/v${version}/sphinx_simplepdf-${version}-py3-none-any.whl"
+            "https://github.com/OpenSiFli/sphinx-simplepdf-sifli/releases/download/v${version}/sphinx_simplepdf-${version}.tar.gz"
           )
 
           # 下载文件
@@ -53,7 +52,9 @@ jobs:
           done
 
           # 上传文件到 COS
-          coscmd upload -rs --delete --yes dist/${version} tools/${PROJ_NAME}/vs${version}/
+          # coscmd upload -rs --delete --yes dist/${version} tools/${PROJ_NAME}/v${version}/
+          coscmd upload -rs --delete --yes dist/${version}/sphinx_simplepdf-${version}-py3-none-any.whl tools/sphinx-simplepdf/latest/sphinx_simplepdf-$latest-py3-none-any.whl
+          coscmd upload -rs --delete --yes dist/${version}/sphinx_simplepdf-${version}.tar.gz tools/sphinx-simplepdf/latest/sphinx_simplepdf-$latest.tar.gz
         done
         echo "All versions processed and uploaded."
 
