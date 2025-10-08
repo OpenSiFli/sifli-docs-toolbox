@@ -46,36 +46,39 @@ def run_command(command, cwd=None):
         exit(result.returncode)
 
 
-def make_doc(version, lang, is_pdf, non_clean):
-    if is_pdf:
+def make_doc(version, lang):
+    if args.pdf:
         print(f"Building PDF documentation for version {version}, language: {lang} ...")
     else:
         print(f"Building HTML documentation for version {version}, language: {lang} ...")
     if version:
         os.environ['SIFLI_DOC_VERSION'] = version
     os.environ['SIFLI_DOC_LANGUAGE'] = lang
-    if not non_clean:
+    if args.clean:
         opts = '-a -E'
     else:
         opts = ''
 
-    if is_pdf:
-        run_command(f'sphinx-build -M simplepdf source/{lang} build/{lang} {opts} -j 8')
+    if args.pdf:
+        run_command(f'sphinx-build -M simplepdf source/{lang} build/{lang} {opts} -j {args.cores}')
     else:
-        run_command(f'sphinx-build -M html source/{lang} build/{lang} {opts} -j 8')
+        run_command(f'sphinx-build -M html source/{lang} build/{lang} {opts} -j {args.cores}')
 
-def _main(version, lang, pdf, non_clean):
-    make_doc(version, lang, pdf, non_clean)
+def _main(version, lang):
+    make_doc(version, lang)
 
 def main():
+    global args
+
     parser = argparse.ArgumentParser(description='Generate documentation.')
     parser.add_argument('--lang', choices=['en', 'zh_CN'], default='zh_CN', help='Specify language(en or zh_CN)')
     parser.add_argument('--version', type=str, help='Specify version')
     parser.add_argument('--pdf', action="store_true", help='Build PDF')
-    parser.add_argument('--non-clean', action="store_true", help='non clean build')
+    parser.add_argument('--clean', action="store_true", help='clean build')
+    parser.add_argument('--cores', type=int, default=8, help='number for cores used by multi-thread building')
     args = parser.parse_args()
 
-    _main(args.version, args.lang, args.pdf, args.non_clean)
+    _main(args.version, args.lang)
 
 if __name__ == "__main__":
     main()
