@@ -1,0 +1,12 @@
+body {
+  font-family: "Roboto", "FangZheng ShuSong GBK", serif;
+}
+
+h1, h2, h3, h4 h5, h6 {
+  font-family: "FangZheng HeiTi GBK", sans-serif;
+}
+
+pre {
+  font-family: "Fira Mono", "Noto Sans Mono CJK";
+}
+
