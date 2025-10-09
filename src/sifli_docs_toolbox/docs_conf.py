@@ -157,7 +157,7 @@ def update_config(app, config):
     if app.config.doc_id and app.config.chip and app.config.doc_name:
         pdf_filename = f"{app.config.doc_id}_{app.config.chip}_{app.config.doc_name}_{version}.pdf"
     else:
-        pdf_filename = f"{app.config.project}.pdf"
+        pdf_filename = f"{app.config.project}_{version}.pdf"
 
     if is_simplepdf_builder and pdf_filename:
         app.config.simplepdf_file_name = pdf_filename
