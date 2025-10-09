@@ -32,8 +32,11 @@ extensions = [
               "sphinx_selective_exclude.search_auto_exclude",
               "sphinx_last_updated_by_git",
               "sphinx_simplepdf",
-              "sifli_docs_toolbox.extensions.gen_unique_ids"
 ]
+
+if 'simplepdf' in sys.argv:
+    # only include gen_unique_ids extension when simplepdf builder is runs
+    extensions +=  ["sifli_docs_toolbox.extensions.gen_unique_ids"]
 
 templates_path = ['../_templates']
 exclude_patterns = []
