@@ -29,7 +29,7 @@ You can also get a template document by cloning https://github.com/opensifli/sif
 - `--help`: 查看命令行参数说明
 - `--lang`: 指定文档语言，缺省为中文
 - `--version`: 指定文档版本号，缺省为`latest`
-- `--pdf`: 生成PDF文档，缺省为生成HTML文档
+- `--pdf`: 生成PDF文档，缺省为生成HTML文档, Windows平台**不支持**PDF文档编译
 - `--clean`: 清空编译，如果编译不同格式的文档需要选择清空编译，比如编译完PDF格式的文档想编译HTML，需要选择清空编译
 - `--cores`: 指定并行编译使用的内核数量，缺省为8个
 
