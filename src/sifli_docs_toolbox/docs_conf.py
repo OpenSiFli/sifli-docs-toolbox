@@ -32,6 +32,7 @@ extensions = [
               "sphinx_selective_exclude.search_auto_exclude",
               "sphinx_last_updated_by_git",
               "sphinx_simplepdf",
+              "sphinxcontrib.video"
 ]
 
 if 'simplepdf' in sys.argv:
