@@ -33,7 +33,9 @@ You can also get a template document by cloning https://github.com/opensifli/sif
 - `--clean`: 清空编译，如果编译不同格式的文档需要选择清空编译，比如编译完PDF格式的文档想编译HTML，需要选择清空编译
 - `--cores`: 指定并行编译使用的内核数量，缺省为8个
 
-## Download
+## 安装
+Python版本使用`3.12`，pip版本使用`24.0`，高版本的python和pip（比如`3.15`）可能因为对wheel文件名检查更严格而安装失败。
+
 The latest version could be found: 
 - [wheel](https://downloads.sifli.com/tools/sifli-docs-toolbox/latest/sifli_docs_toolbox-latest-py3-none-any.whl)
 - [source](https://downloads.sifli.com/tools/sifli-docs-toolbox/latest/sifli_docs_toolbox-latest.tar.gz)
